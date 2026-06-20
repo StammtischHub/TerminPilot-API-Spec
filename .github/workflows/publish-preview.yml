@@ -1,0 +1,42 @@
+name: Publish Preview Package
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  publish-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - run: npm ci
+
+      - name: Set preview version
+        run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          PREVIEW_VERSION="${BASE_VERSION}-pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
+          npm version $PREVIEW_VERSION --no-git-tag-version
+          echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
+
+      - run: npm publish --tag preview
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print preview package info
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📦 Preview Package published"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Version:  @stammtischhub/terminpilot-api-spec@${{ env.PREVIEW_VERSION }}"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
