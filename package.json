@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "@redocly/cli": "2.34.0",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^5.0.0"
   }
 }
