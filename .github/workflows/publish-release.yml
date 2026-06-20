@@ -2,7 +2,8 @@ name: Publish Release Package
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   publish-release:

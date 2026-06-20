@@ -12,8 +12,8 @@ importers:
         specifier: 2.34.0
         version: 2.34.0
       js-yaml:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^4.2.0
+        version: 4.2.0
 
 packages:
 
@@ -25,8 +25,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  js-yaml@5.0.0:
-    resolution: {integrity: sha512-GSvaPUbk1U+FMZ7rJzF+F8e5YVtu7KnD40et/5rBXXRBv2jCO9L3qCewvIDDdudC0QycTFlf6EAA+h3kxBsuUw==}
+  js-yaml@4.2.0:
+    resolution: {integrity: sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==}
     hasBin: true
 
 snapshots:
@@ -35,6 +35,6 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  js-yaml@5.0.0:
+  js-yaml@4.2.0:
     dependencies:
       argparse: 2.0.1

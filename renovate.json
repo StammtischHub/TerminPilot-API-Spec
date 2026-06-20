@@ -18,6 +18,11 @@
   },
   "packageRules": [
     {
+      "description": "Warte 3 Tage bevor ein Update eingespielt wird",
+      "matchPackagePatterns": ["*"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
       "description": "Major Updates: PR erstellen, aber kein Auto-Merge",
       "matchUpdateTypes": ["major"],
       "automerge": false,
