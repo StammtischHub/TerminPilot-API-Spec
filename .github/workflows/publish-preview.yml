@@ -7,7 +7,6 @@ on:
 jobs:
   check-version-bump:
     runs-on: ubuntu-latest
-    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v7
@@ -23,14 +22,14 @@ jobs:
           echo "Version on branch: $VERSION_BRANCH"
           
           if [ "$VERSION_MAIN" = "$VERSION_BRANCH" ]; then
-            CHANGED=$(git diff origin/main...HEAD -- src/ package.json pnpm-lock.yaml .github/workflows/ | head -1)
+            CHANGED=$(git diff origin/main...HEAD -- src/ | head -1)
           
             if [ -n "$CHANGED" ]; then
-              echo "⚠️  Relevant files have changed, but the version in package.json is still $VERSION_BRANCH"
+              echo "⚠️  Api Relevant files have changed, but the version in package.json is still $VERSION_BRANCH"
               echo "Please execute 'pnpm version patch/minor/major' to bump the version."
               exit 1
             else
-              echo "✅ No relevant files have changed, skipping version bump check."
+              echo "✅ No api relevant files have changed, skipping version bump check."
             fi
           else
             echo "✅ Version was bumped from $VERSION_MAIN to $VERSION_BRANCH."
