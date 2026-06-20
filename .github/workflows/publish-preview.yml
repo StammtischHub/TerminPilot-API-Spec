@@ -5,6 +5,37 @@ on:
     types: [opened, synchronize]
 
 jobs:
+  check-version-bump:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check for relevant changes without version bump
+        run: |
+          VERSION_MAIN=$(git show origin/main:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null)
+          VERSION_BRANCH=$(node -p "require('./package.json').version")
+          
+          echo "Version on main:   $VERSION_MAIN"
+          echo "Version on branch: $VERSION_BRANCH"
+          
+          if [ "$VERSION_MAIN" = "$VERSION_BRANCH" ]; then
+            CHANGED=$(git diff origin/main...HEAD -- src/ package.json pnpm-lock.yaml .github/workflows/ | head -1)
+          
+            if [ -n "$CHANGED" ]; then
+              echo "⚠️  Relevant files have changed, but the version in package.json is still $VERSION_BRANCH"
+              echo "Please execute 'pnpm version patch/minor/major' to bump the version."
+              exit 1
+            else
+              echo "✅ No relevant files have changed, skipping version bump check."
+            fi
+          else
+            echo "✅ Version was bumped from $VERSION_MAIN to $VERSION_BRANCH."
+          fi
+
   publish-preview:
     runs-on: ubuntu-latest
     permissions:
@@ -27,8 +58,9 @@ jobs:
 
       - name: Set preview version
         run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-10)
-          PREVIEW_VERSION="pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
+          PREVIEW_VERSION="${BASE_VERSION}-pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
           npm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
