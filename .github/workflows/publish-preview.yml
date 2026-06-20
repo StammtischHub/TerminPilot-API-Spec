@@ -14,12 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
 
       - name: Set preview version
         run: |
@@ -29,7 +33,7 @@ jobs:
           npm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
-      - run: npm publish --tag preview
+      - run: pnpm publish --tag preview --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

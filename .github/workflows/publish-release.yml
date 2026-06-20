@@ -14,14 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
 
-      - run: npm publish --tag latest
+      - run: pnpm publish --tag latest --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
