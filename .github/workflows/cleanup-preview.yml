@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const prNumber = context.issue.number;
-            const prefix = `-pr-${prNumber}-`;
+            const prefix = `pr-${prNumber}-`;
 
             const versions = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
               package_type: 'npm',
@@ -24,7 +24,7 @@ jobs:
             });
 
             for (const version of versions.data) {
-              if (version.name.includes(prefix)) {
+              if (version.name.startsWith(prefix)) {
                 await github.rest.packages.deletePackageVersionForOrg({
                   package_type: 'npm',
                   package_name: 'terminpilot-api-spec',

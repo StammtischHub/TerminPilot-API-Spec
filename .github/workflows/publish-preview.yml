@@ -27,9 +27,8 @@ jobs:
 
       - name: Set preview version
         run: |
-          BASE_VERSION=$(node -p "require('./package.json').version")
-          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          PREVIEW_VERSION="${BASE_VERSION}-pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-10)
+          PREVIEW_VERSION="pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
           npm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
