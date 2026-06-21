@@ -13,7 +13,7 @@ fs.writeFileSync(
     `version: ${packageVersion}`
   )
 );
-console.log(`✅ openapi.yaml version synced to ${packageVersion}`);
+console.log(`✅ src/openapi.yaml version synced to ${packageVersion}`);
 
 const mavenDeployPath = '.github/maven/maven-deploy.xml';
 const mavenDeployXml = fs.readFileSync(mavenDeployPath, 'utf8');
@@ -24,4 +24,4 @@ fs.writeFileSync(
     `<version>${packageVersion}</version>`
   )
 );
-console.log(`✅ deploy.xml version synced to ${packageVersion}`);
+console.log(`✅ .github/maven/maven-deploy.xml version synced to ${packageVersion}`);
