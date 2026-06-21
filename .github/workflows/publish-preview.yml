@@ -66,6 +66,20 @@ jobs:
           pnpm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
+      - name: Test Maven deploy
+        run: |
+          mvn deploy:deploy-file \
+            -Dfile=dist/openapi.bundled.yaml \
+            -DpomFile=${{ github.workspace }}/.github/maven/maven-deploy.xml \
+            -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec \
+            -DrepositoryId=github \
+            -Dusername=$GITHUB_ACTOR \
+            -Dpassword=$GITHUB_TOKEN \
+            -X 2>&1 | grep -E "(Authorization|username|password|401|Unauthorized|transfer)"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+
       - name: Publish preview packages
         run: pnpm run publish:ci:all:preview
         env:
