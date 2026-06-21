@@ -66,14 +66,6 @@ jobs:
           pnpm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
-      - name: Test token permissions
-        run: |
-          curl -v -u "$GITHUB_ACTOR:$GITHUB_TOKEN" \
-            https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-
       - name: Publish preview packages
         run: pnpm run publish:ci:all:preview
         env:
