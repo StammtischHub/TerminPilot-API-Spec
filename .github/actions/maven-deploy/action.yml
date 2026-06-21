@@ -1,0 +1,52 @@
+name: Deploy Maven Package to GitHub
+description: Creates Maven settings.xml and deploys a Maven package to GitHub
+
+inputs:
+  file:
+    description: Filepath to the artifact to be deployed
+    required: true
+  pom-file:
+    description: Path to the POM file
+    required: true
+  url:
+    description: GitHub Packages Maven Registry URL
+    required: true
+  repository-id:
+    description: Repository ID for the Maven repository)
+    required: true
+    default: github
+  github-token:
+    description: GitHub Token for authentication (e.g. GITHUB_TOKEN)
+    required: true
+  github-actor:
+    description: GitHub Actor (Username)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create Maven settings
+      shell: bash
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml << EOF
+        <settings>
+          <servers>
+            <server>
+              <id>${{ inputs.repository-id }}</id>
+              <username>${{ inputs.github-actor }}</username>
+              <password>${{ inputs.github-token }}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF
+
+    - name: Deploy Maven package
+      shell: bash
+      run: |
+        mvn deploy:deploy-file \
+          --no-transfer-progress \
+          -Dfile=${{ inputs.file }} \
+          -DpomFile=${{ inputs.pom-file }} \
+          -Durl=${{ inputs.url }} \
+          -DrepositoryId=${{ inputs.repository-id }}

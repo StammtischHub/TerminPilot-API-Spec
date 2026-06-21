@@ -7,10 +7,12 @@
     "dist/"
   ],
   "scripts": {
-    "version": "node scripts/sync-version.js && git add src/openapi.yaml",
+    "version": "node scripts/sync-version.js",
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
-    "prepublishOnly": "npm run validate && npm run build"
+    "prepublishOnly": "pnpm run validate && pnpm run build",
+    "publish:preview": "pnpm publish --no-git-checks --tag preview",
+    "publish:release": "pnpm publish --no-git-checks --tag latest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
