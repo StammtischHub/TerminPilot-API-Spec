@@ -11,7 +11,7 @@ fs.writeFileSync(specPath, spec);
 console.log(`✅ openapi.yaml version synced to ${version}`);
 
 // deploy.xml sync
-const deployPath = '.github/deploy.xml';
+const deployPath = '.github/maven/maven-deploy.xml';
 let deploy = fs.readFileSync(deployPath, 'utf8');
 deploy = deploy.replace(/<version>.*<\/version>/, `<version>${version}</version>`);
 fs.writeFileSync(deployPath, deploy);
