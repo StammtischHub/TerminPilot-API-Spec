@@ -68,15 +68,16 @@ jobs:
 
       - name: Deploy Maven package
         run: |
-          TOKEN="${GITHUB_TOKEN}"
-          ACTOR="${GITHUB_ACTOR}"
           mvn deploy:deploy-file \
             -Dfile=dist/openapi.bundled.yaml \
-            -DpomFile=${{ github.workspace }}/.github/maven/maven-deploy.xml \
+            -DgroupId=de.stammtischhub \
+            -DartifactId=terminpilot-api-spec \
+            -Dversion=0.0.0-test \
+            -Dpackaging=yaml \
             -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec \
             -DrepositoryId=github \
-            -Dusername="${ACTOR}" \
-            -Dpassword="${TOKEN}"
+            -Dusername=$GITHUB_ACTOR \
+            -Dpassword=$GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
