@@ -57,6 +57,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
+          MAVEN_SETTINGS: ${{ github.workspace }}/.github/maven-settings.xml
 
       - name: Create Git tag
         run: |

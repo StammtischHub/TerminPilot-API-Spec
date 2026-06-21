@@ -11,7 +11,7 @@
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
-    "publish:maven": "mvn deploy:deploy-file -Dfile=dist/openapi.bundled.yaml -DgroupId=de.stammtischhub -DartifactId=terminpilot-api-spec -Dpackaging=yaml -DrepositoryId=github -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec -Dsettings=.github/maven-settings.xml -Dversion=$(node -p \"require('./package.json').version\")",
+    "publish:maven": "mvn deploy:deploy-file -Dfile=dist/openapi.bundled.yaml -DgroupId=de.stammtischhub -DartifactId=terminpilot-api-spec -Dpackaging=yaml -DrepositoryId=github -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec -Dsettings=${MAVEN_SETTINGS:-.github/maven-settings.xml} -Dversion=$(node -p \"require('./package.json').version\")",
     "publish:all:preview": "pnpm publish --no-git-checks --tag preview && pnpm run publish:maven",
     "publish:all:release": "pnpm publish --no-git-checks --tag latest && pnpm run publish:maven"
   },
