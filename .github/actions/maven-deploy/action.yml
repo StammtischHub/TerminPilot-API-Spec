@@ -1,33 +1,51 @@
-name: Deploy Maven Package
-description: Deploy a Maven package to GitHub Packages using the provided parameters
+name: Deploy Maven Package to GitHub
+description: Creates Maven settings.xml and deploys a Maven package to GitHub
+
 inputs:
-  MVN_DP_VERSION:
-    description: 'The version to use'
+  file:
+    description: Filepath to the artifact to be deployed
+    required: true
+  pom-file:
+    description: Path to the POM file
+    required: true
+  url:
+    description: GitHub Packages Maven Registry URL
+    required: true
+  repository-id:
+    description: Repository ID for the Maven repository)
+    required: true
+    default: github
+  github-token:
+    description: GitHub Token for authentication (e.g. GITHUB_TOKEN)
+    required: true
+  github-actor:
+    description: GitHub Actor (Username)
     required: true
 
 runs:
   using: composite
   steps:
-    - name: Deploy Maven Package
+    - name: Create Maven settings
+      shell: bash
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml << EOF
+        <settings>
+          <servers>
+            <server>
+              <id>${{ inputs.repository-id }}</id>
+              <username>${{ inputs.github-actor }}</username>
+              <password>${{ inputs.github-token }}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF
+
+    - name: Deploy Maven package
       shell: bash
       run: |
         mvn deploy:deploy-file \
-          -Dfile=$MVN_DP_OPENAPI_FILE \
-          -DgroupId=$MVN_DP_GROUP_ID \
-          -DartifactId=$MVN_DP_ARTIFACT_ID \
-          -Dversion=$MVN_DP_VERSION \
-          -Dpackaging=$MVN_DP_PACKAGING \
-          -Durl=$MVN_DP_URL \
-          -DrepositoryId=$MVN_DP_REPO_ID \
-          -Dusername=$GITHUB_ACTOR \
-          -Dpassword=$GITHUB_TOKEN
-      env:
-        MVN_DP_OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
-        MVN_DP_GROUP_ID: de.stammtischhub
-        MVN_DP_ARTIFACT_ID: terminpilot-api-spec
-        MVN_DP_VERSION: ${{ inputs.MVN_DP_VERSION }}
-        MVN_DP_PACKAGING: yaml
-        MVN_DP_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
-        MVN_DP_REPO_ID: github
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_ACTOR: ${{ github.actor }}
+          -Dfile=${{ inputs.file }} \
+          -DpomFile=${{ inputs.pom-file }} \
+          -Durl=${{ inputs.url }} \
+          -DrepositoryId=${{ inputs.repository-id }}

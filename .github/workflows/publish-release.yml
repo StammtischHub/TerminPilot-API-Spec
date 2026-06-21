@@ -58,7 +58,11 @@ jobs:
 
       - uses: ./.github/actions/maven-deploy
         with:
-          MVN_DP_VERSION: $(node -p "require('./package.json').version")
+          file: dist/openapi.bundled.yaml
+          pom-file: .github/maven/maven-deploy-pom.xml
+          url: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-actor: ${{ github.actor }}
 
       - name: Create Git tag
         run: |
