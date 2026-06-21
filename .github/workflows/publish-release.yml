@@ -57,6 +57,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/maven-deploy
+        with:
+          MVN_DP_VERSION: $(node -p "require('./package.json').version")
 
       - name: Create Git tag
         run: |

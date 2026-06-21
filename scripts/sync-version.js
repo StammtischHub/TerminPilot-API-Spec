@@ -14,14 +14,3 @@ fs.writeFileSync(
   )
 );
 console.log(`✅ src/openapi.yaml version synced to ${packageVersion}`);
-
-const mavenDeployPath = '.github/maven/maven-deploy.xml';
-const mavenDeployXml = fs.readFileSync(mavenDeployPath, 'utf8');
-fs.writeFileSync(
-  mavenDeployPath,
-  mavenDeployXml.replace(
-    /<version>.*<\/version>/,
-    `<version>${packageVersion}</version>`
-  )
-);
-console.log(`✅ .github/maven/maven-deploy.xml version synced to ${packageVersion}`);

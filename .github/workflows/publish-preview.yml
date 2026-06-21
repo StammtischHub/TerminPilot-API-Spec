@@ -72,6 +72,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/maven-deploy
+        with:
+          MVN_DP_VERSION: ${{ env.PREVIEW_VERSION }}
 
       - name: Print preview package info
         run: |
