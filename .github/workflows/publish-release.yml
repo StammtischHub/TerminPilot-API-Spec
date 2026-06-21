@@ -51,16 +51,27 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Publish packages
-        run: pnpm run publish:ci:all:release
+      - name: Publish npm release package
+        run: pnpm run publish:release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
+
+      - name: Deploy Maven package
+        run: |
+          mvn deploy:deploy-file \
+            -Dfile=$OPENAPI_FILE \
+            -DpomFile=$MAVEN_POM \
+            -Durl=$MAVEN_PKG_URL \
+            -DrepositoryId=$MAVEN_REPO_ID \
+            -Dusername=$GITHUB_ACTOR \
+            -Dpassword=$GITHUB_TOKEN
+        env:
           OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MAVEN_POM: ${{ github.workspace }}/.github/maven/maven-deploy.xml
           MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
           MAVEN_REPO_ID: github
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Create Git tag
         run: |
@@ -69,7 +80,7 @@ jobs:
           git push origin "v$VERSION"
           
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "📦 Release Package published"
+          echo "📦 Release packages published"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:$VERSION@yaml"
           echo "npm package version:  @stammtischhub/terminpilot-api-spec@$VERSION"

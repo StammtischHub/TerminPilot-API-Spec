@@ -11,9 +11,8 @@
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
-    "publish:ci:maven": "mvn deploy:deploy-file -Dfile=${OPENAPI_FILE} -DpomFile=${MAVEN_POM} -Durl=${MAVEN_PKG_URL} -DrepositoryId=${MAVEN_REPO_ID} -Dusername=${GITHUB_ACTOR} -Dpassword=${GITHUB_TOKEN}",
-    "publish:ci:all:preview": "pnpm publish --no-git-checks --tag preview && pnpm run publish:ci:maven",
-    "publish:ci:all:release": "pnpm publish --no-git-checks --tag latest && pnpm run publish:ci:maven"
+    "publish:preview": "pnpm publish --no-git-checks --tag preview",
+    "publish:release": "pnpm publish --no-git-checks --tag latest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

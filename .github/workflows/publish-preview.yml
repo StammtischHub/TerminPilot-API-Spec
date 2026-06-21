@@ -66,32 +66,27 @@ jobs:
           pnpm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
+      - name: Publish npm preview package
+        run: pnpm run publish:preview
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy Maven package
         run: |
           mvn deploy:deploy-file \
-            -Dfile=dist/openapi.bundled.yaml \
-            -DgroupId=de.stammtischhub \
-            -DartifactId=terminpilot-api-spec \
-            -Dversion=0.0.0-test \
-            -Dpackaging=yaml \
-            -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec \
-            -DrepositoryId=github \
+            -Dfile=$OPENAPI_FILE \
+            -DpomFile=$MAVEN_POM \
+            -Durl=$MAVEN_PKG_URL \
+            -DrepositoryId=$MAVEN_REPO_ID \
             -Dusername=$GITHUB_ACTOR \
             -Dpassword=$GITHUB_TOKEN
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-
-      - name: Publish preview packages
-        run: pnpm run publish:ci:all:preview
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
           OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MAVEN_POM: ${{ github.workspace }}/.github/maven/maven-deploy.xml
           MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
           MAVEN_REPO_ID: github
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Print preview package info
         run: |
