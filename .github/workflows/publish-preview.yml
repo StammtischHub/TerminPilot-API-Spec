@@ -74,17 +74,23 @@ jobs:
       - name: Deploy Maven package
         run: |
           mvn deploy:deploy-file \
-            -Dfile=$OPENAPI_FILE \
-            -DpomFile=$MAVEN_POM \
-            -Durl=$MAVEN_PKG_URL \
-            -DrepositoryId=$MAVEN_REPO_ID \
+            -Dfile=$MVN_DP_OPENAPI_FILE \
+            -DgroupId=$MVN_DP_GROUP_ID \
+            -DartifactId=$MVN_DP_ARTIFACT_ID \
+            -Dversion=$MVN_DP_VERSION \
+            -Dpackaging=$MVN_DP_PACKAGING \
+            -Durl=$MVN_DP_URL \
+            -DrepositoryId=$MVN_DP_REPO_ID \
             -Dusername=$GITHUB_ACTOR \
             -Dpassword=$GITHUB_TOKEN
         env:
-          OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
-          MAVEN_POM: ${{ github.workspace }}/.github/maven/maven-deploy.xml
-          MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
-          MAVEN_REPO_ID: github
+          MVN_DP_OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
+          MVN_DP_GROUP_ID: de.stammtischhub
+          MVN_DP_ARTIFACT_ID: terminpilot-api-spec
+          MVN_DP_VERSION: ${{ env.PREVIEW_VERSION }}
+          MVN_DP_PACKAGING: yaml
+          MVN_DP_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
+          MVN_DP_REPO_ID: github
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 

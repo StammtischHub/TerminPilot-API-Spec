@@ -1,7 +1,0 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>de.stammtischhub</groupId>
-    <artifactId>terminpilot-api-spec</artifactId>
-    <version>0.0.0</version>
-    <packaging>yaml</packaging>
-</project>
