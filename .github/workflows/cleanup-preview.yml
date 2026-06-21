@@ -17,14 +17,15 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             const prefix = `-pr-${prNumber}-`;
-
-            const versions = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
+            
+            // npm Package Versionen löschen
+            const npmVersions = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
               package_type: 'npm',
               package_name: 'terminpilot-api-spec',
               org: context.repo.owner,
             });
-
-            for (const version of versions.data) {
+            
+            for (const version of npmVersions.data) {
               if (version.name.includes(prefix)) {
                 await github.rest.packages.deletePackageVersionForOrg({
                   package_type: 'npm',
@@ -32,8 +33,27 @@ jobs:
                   org: context.repo.owner,
                   package_version_id: version.id,
                 });
-                console.log(`Deleted: ${version.name}`);
+                console.log(`Deleted npm: ${version.name}`);
               }
             }
-
+            
+            // Maven Package Versionen löschen
+            const mavenVersions = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
+              package_type: 'maven',
+              package_name: 'de.stammtischhub.terminpilot-api-spec',
+              org: context.repo.owner,
+            });
+            
+            for (const version of mavenVersions.data) {
+              if (version.name.includes(prefix)) {
+                await github.rest.packages.deletePackageVersionForOrg({
+                  package_type: 'maven',
+                  package_name: 'de.stammtischhub.terminpilot-api-spec',
+                  org: context.repo.owner,
+                  package_version_id: version.id,
+                });
+                console.log(`Deleted maven: ${version.name}`);
+              }
+            }
+            
             console.log(`Cleanup done for PR #${prNumber}`);

@@ -23,7 +23,7 @@ jobs:
             echo "Tag v$VERSION existiert bereits, überspringe..."
             echo "skip=true" >> $GITHUB_OUTPUT
           else
-          echo "Neue Version ohne Tag gefunden: v$VERSION"
+            echo "Neue Version ohne Tag gefunden: v$VERSION"
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
@@ -51,17 +51,22 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm publish --tag latest --no-git-checks
+      - name: Publish packages
+        run: pnpm run publish:all:release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Create Git tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
           git tag "v$VERSION"
+          git push origin "v$VERSION"
           
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "📦 Release Package published"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "Version:  @stammtischhub/terminpilot-api-spec@$VERSION"
+          echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:$VERSION@yaml"
+          echo "npm package version:  @stammtischhub/terminpilot-api-spec@$VERSION"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

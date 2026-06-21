@@ -2,10 +2,6 @@ name: Publish Preview Package
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
 
 jobs:
   check-version-bump:
@@ -40,6 +36,7 @@ jobs:
 
   publish-preview:
     runs-on: ubuntu-latest
+    needs: check-version-bump
     permissions:
       contents: read
       packages: write
@@ -61,19 +58,23 @@ jobs:
       - name: Set preview version
         run: |
           BASE_VERSION=$(node -p "require('./package.json').version")
-          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-10)
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           PREVIEW_VERSION="${BASE_VERSION}-pr-${{ github.event.pull_request.number }}-${SHORT_SHA}"
-          npm version $PREVIEW_VERSION --no-git-tag-version
+          pnpm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
-      - run: pnpm publish --tag preview --no-git-checks
+      - name: Publish preview packages
+        run: pnpm run publish:all:preview
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Print preview package info
         run: |
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "📦 Preview Package published"
+          echo "📦 Preview packages published"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "Version:  @stammtischhub/terminpilot-api-spec@${{ env.PREVIEW_VERSION }}"
+          echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:${{ env.PREVIEW_VERSION }}@yaml"
+          echo "npm package version:  @stammtischhub/terminpilot-api-spec@${{ env.PREVIEW_VERSION }}"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
