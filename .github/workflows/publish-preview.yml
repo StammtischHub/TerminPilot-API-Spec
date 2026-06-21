@@ -71,6 +71,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
       - name: Deploy Maven package
         run: |
           mvn deploy:deploy-file \
@@ -80,10 +88,10 @@ jobs:
             -Dversion=$MVN_DP_VERSION \
             -Dpackaging=$MVN_DP_PACKAGING \
             -Durl=$MVN_DP_URL \
-            -DrepositoryId=$MVN_DP_REPO_ID \
-            -Dusername=$GITHUB_ACTOR \
-            -Dpassword=$GITHUB_TOKEN
+            -DrepositoryId=github
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
           MVN_DP_OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MVN_DP_GROUP_ID: de.stammtischhub
           MVN_DP_ARTIFACT_ID: terminpilot-api-spec
@@ -91,8 +99,6 @@ jobs:
           MVN_DP_PACKAGING: yaml
           MVN_DP_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
           MVN_DP_REPO_ID: github
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Print preview package info
         run: |
