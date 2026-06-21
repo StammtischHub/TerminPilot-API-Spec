@@ -67,12 +67,25 @@ jobs:
       - name: Create Git tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           git tag "v$VERSION"
           git push origin "v$VERSION"
-          
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "📦 Release packages published"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:$VERSION@yaml"
-          echo "npm package version:  @stammtischhub/terminpilot-api-spec@$VERSION"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+      - name: Create GitHub Release
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const version = require('./package.json').version;
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `v${version}`,
+              name: `v${version}`,
+              body: `Release v${version}`,
+              draft: false,
+              prerelease: false,
+            });
+
+      - uses: ./.github/actions/print-package-info
+        with:
+          package_version: ${{ env.RELEASE_VERSION }}
