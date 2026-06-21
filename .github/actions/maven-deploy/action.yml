@@ -45,6 +45,7 @@ runs:
       shell: bash
       run: |
         mvn deploy:deploy-file \
+          -q \
           -Dfile=${{ inputs.file }} \
           -DpomFile=${{ inputs.pom-file }} \
           -Durl=${{ inputs.url }} \
