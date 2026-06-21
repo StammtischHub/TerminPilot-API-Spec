@@ -82,7 +82,6 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MAVEN_POM: ${{ github.workspace }}/.github/maven/maven-deploy.xml
-          MAVEN_SETTINGS: ${{ github.workspace }}/.github/maven/maven-settings.xml
           MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
           MAVEN_REPO_ID: github
 
