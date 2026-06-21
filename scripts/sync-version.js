@@ -1,18 +1,27 @@
 const fs = require('fs');
 
-const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-const version = pkg.version;
+const packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const packageVersion = packageJSON.version;
 
-// openapi.yaml sync
-const specPath = './src/openapi.yaml';
-let spec = fs.readFileSync(specPath, 'utf8');
-spec = spec.replace(/^version:.*$/m, `version: ${version}`);
-fs.writeFileSync(specPath, spec);
-console.log(`✅ openapi.yaml version synced to ${version}`);
+const openapiSpecPath = './src/openapi.yaml';
+const openapiSpecContent = fs.readFileSync(openapiSpecPath, 'utf8');
+openapiSpecContent.replace(/^version:.*$/m, `version: ${packageVersion}`);
+fs.writeFileSync(
+  openapiSpecPath,
+  openapiSpecContent.replace(
+    /^version:.*$/m,
+    `version: ${packageVersion}`
+  )
+);
+console.log(`✅ openapi.yaml version synced to ${packageVersion}`);
 
-// deploy.xml sync
-const deployPath = '.github/maven/maven-deploy.xml';
-let deploy = fs.readFileSync(deployPath, 'utf8');
-deploy = deploy.replace(/<version>.*<\/version>/, `<version>${version}</version>`);
-fs.writeFileSync(deployPath, deploy);
-console.log(`✅ deploy.xml version synced to ${version}`);
+const mavenDeployPath = '.github/maven/maven-deploy.xml';
+const mavenDeployXml = fs.readFileSync(mavenDeployPath, 'utf8');
+fs.writeFileSync(
+  mavenDeployPath,
+  mavenDeployXml.replace(
+    /<version>.*<\/version>/,
+    `<version>${packageVersion}</version>`
+  )
+);
+console.log(`✅ deploy.xml version synced to ${packageVersion}`);
