@@ -79,11 +79,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-actor: ${{ github.actor }}
 
-      - name: Print preview package info
-        run: |
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "📦 Preview packages published"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:${{ env.PREVIEW_VERSION }}@yaml"
-          echo "npm package version:  @stammtischhub/terminpilot-api-spec@${{ env.PREVIEW_VERSION }}"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      - uses: ./.github/actions/print-package-info
+        with:
+          package_version: ${{ env.PREVIEW_VERSION }}

@@ -1,0 +1,19 @@
+name: Print Package Info
+description: Prints the package info to the console
+inputs:
+  package_version:
+    description: 'Package version'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Print preview package info
+      shell: bash
+      run: |
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "📦 Packages published"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "mvn package version:  de.stammtischhub:terminpilot-api-spec:${{ inputs.package_version }}@yaml"
+        echo "npm package version:  @stammtischhub/terminpilot-api-spec@${{ inputs.package_version }}"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
