@@ -4,4 +4,11 @@
     <artifactId>terminpilot-api-spec</artifactId>
     <version>0.0.0</version>
     <packaging>yaml</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec</url>
+        </repository>
+    </distributionManagement>
 </project>
