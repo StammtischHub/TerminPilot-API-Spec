@@ -11,7 +11,7 @@
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
-    "publish:maven": "mvn deploy:deploy-file -Dfile=dist/openapi.bundled.yaml -DpomFile=.github/maven/maven-deploy.xml -Dsettings=.github/maven-settings.xml",
+    "publish:maven": "mvn deploy:deploy-file -Dfile=dist/openapi.bundled.yaml -DpomFile=.github/maven/maven-deploy.xml -Dsettings=.github/maven/maven-settings.xml",
     "publish:all:preview": "pnpm publish --no-git-checks --tag preview && pnpm run publish:maven",
     "publish:all:release": "pnpm publish --no-git-checks --tag latest && pnpm run publish:maven"
   },
