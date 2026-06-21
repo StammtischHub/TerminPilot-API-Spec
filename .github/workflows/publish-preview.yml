@@ -69,7 +69,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
-          MAVEN_SETTINGS: ${{ github.workspace }}/.github/maven-settings.xml
+          MAVEN_POM: ${{ github.workspace }}/.github/maven-deploy.xml
 
       - name: Print preview package info
         run: |
