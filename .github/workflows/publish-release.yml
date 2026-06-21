@@ -52,12 +52,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Publish packages
-        run: pnpm run publish:all:release
+        run: pnpm run publish:ci:all:release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
+          OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MAVEN_POM: ${{ github.workspace }}/.github/maven-deploy.xml
+          MAVEN_SETTINGS: ${{ github.workspace }}/.github/maven/maven-settings.xml
+          MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
+          MAVEN_REPO_ID: github
 
       - name: Create Git tag
         run: |

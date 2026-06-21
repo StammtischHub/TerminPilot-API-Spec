@@ -11,9 +11,9 @@
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
-    "publish:maven": "mvn deploy:deploy-file -Dfile=dist/openapi.bundled.yaml -DpomFile=.github/maven/maven-deploy.xml -Dsettings=.github/maven/maven-settings.xml -Durl=https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec -DrepositoryId=github",
-    "publish:all:preview": "pnpm publish --no-git-checks --tag preview && pnpm run publish:maven",
-    "publish:all:release": "pnpm publish --no-git-checks --tag latest && pnpm run publish:maven"
+    "publish:ci:maven": "mvn deploy:deploy-file -Dfile=${OPENAPI_FILE} -DpomFile=${MAVEN_POM} -Dsettings=${MAVEN_SETTINGS} -Durl=${MAVEN_PKG_URL} -DrepositoryId=${MAVEN_REPO_ID}",
+    "publish:ci:all:preview": "pnpm publish --no-git-checks --tag preview && pnpm run publish:ci:maven",
+    "publish:ci:all:release": "pnpm publish --no-git-checks --tag latest && pnpm run publish:ci:maven"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

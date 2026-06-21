@@ -66,22 +66,25 @@ jobs:
           pnpm version $PREVIEW_VERSION --no-git-tag-version
           echo "PREVIEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
 
-      - name: Debug Maven settings
+      - name: Test token permissions
         run: |
-          echo "GITHUB_ACTOR: $GITHUB_ACTOR"
-          echo "GITHUB_TOKEN is set: $([ -n "$GITHUB_TOKEN" ] && echo 'yes' || echo 'no')"
-          mvn help:effective-settings -s .github/maven/maven-settings.xml
+          curl -v -u "$GITHUB_ACTOR:$GITHUB_TOKEN" \
+            https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Publish preview packages
-        run: pnpm run publish:all:preview
+        run: pnpm run publish:ci:all:preview
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
+          OPENAPI_FILE: ${{ github.workspace }}/dist/openapi.bundled.yaml
           MAVEN_POM: ${{ github.workspace }}/.github/maven-deploy.xml
+          MAVEN_SETTINGS: ${{ github.workspace }}/.github/maven/maven-settings.xml
+          MAVEN_PKG_URL: https://maven.pkg.github.com/StammtischHub/TerminPilot-API-Spec
+          MAVEN_REPO_ID: github
 
       - name: Print preview package info
         run: |
