@@ -1,0 +1,31 @@
+get:
+  operationId: getTermine
+  summary: Alle Termine abrufen
+  tags: [ Termine ]
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/termin.yaml#/Termin'
+      description: ""
+
+post:
+  operationId: createTermin
+  summary: Termin erstellen
+  tags: [ Termine ]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/termin.yaml#/CreateTerminRequest'
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/termin.yaml#/Termin'
+      description: ""

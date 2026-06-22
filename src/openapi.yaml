@@ -7,4 +7,13 @@ servers:
   - url: http://localhost:8080
     description: Local Development
 
-paths: { }
+paths:
+  /termine:
+    $ref: './paths/termine.yaml'
+
+components:
+  schemas:
+    Termin:
+      $ref: './schemas/termin.yaml#/Termin'
+    CreateTerminRequest:
+      $ref: './schemas/termin.yaml#/CreateTerminRequest'
