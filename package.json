@@ -7,7 +7,7 @@
     "dist/"
   ],
   "scripts": {
-    "version": "node scripts/sync-version.js",
+    "version": "node scripts/sync-version.js && git add src/openapi.yaml .github/maven/maven-deploy-pom.xml",
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
