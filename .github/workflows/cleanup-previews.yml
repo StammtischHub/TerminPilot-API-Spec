@@ -16,7 +16,7 @@ jobs:
         with:
           script: |
             const prNumber = context.issue.number;
-            const prefix = `-pr-${prNumber}-`;
+            const suffix = `-pr.${prNumber}.`;
             
             // npm Package Versionen löschen
             const npmVersions = await github.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
@@ -26,7 +26,7 @@ jobs:
             });
             
             for (const version of npmVersions.data) {
-              if (version.name.includes(prefix)) {
+              if (version.name.includes(suffix)) {
                 await github.rest.packages.deletePackageVersionForOrg({
                   package_type: 'npm',
                   package_name: 'terminpilot-api-spec',
@@ -45,7 +45,7 @@ jobs:
             });
             
             for (const version of mavenVersions.data) {
-              if (version.name.includes(prefix)) {
+              if (version.name.includes(suffix)) {
                 await github.rest.packages.deletePackageVersionForOrg({
                   package_type: 'maven',
                   package_name: 'de.stammtischhub.terminpilot-api-spec',
