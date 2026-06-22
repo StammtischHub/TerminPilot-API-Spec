@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check if version already published
+      - name: Check if version is already published
         id: version-check
         run: |
           VERSION=$(node -p "require('./package.json').version")
@@ -50,6 +50,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - run: pnpm install --frozen-lockfile
+        name: Install dependencies
 
       - name: Publish npm release package
         run: pnpm run publish:release
@@ -57,6 +58,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/maven-deploy
+        name: Publish Maven release package
         with:
           file: dist/openapi.bundled.yaml
           pom-file: .github/maven/maven-deploy-pom.xml
@@ -87,5 +89,6 @@ jobs:
             });
 
       - uses: ./.github/actions/print-package-info
+        name: Print package info to github step summary
         with:
           package_version: ${{ env.RELEASE_VERSION }}
