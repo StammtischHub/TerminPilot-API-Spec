@@ -84,8 +84,8 @@ jobs:
           BASE_VERSION=$(node -p "require('./package.json').version")
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           SNAPSHOT_VERSION="${BASE_VERSION}-pr-${{ github.event.pull_request.number }}-${SHORT_SHA}-SNAPSHOT"
-          pnpm version SNAPSHOT_VERSION --no-git-tag-version
-          echo "SNAPSHOT_VERSION=SNAPSHOT_VERSION" >> $GITHUB_ENV
+          pnpm version $SNAPSHOT_VERSION --no-git-tag-version
+          echo "SNAPSHOT_VERSION=$SNAPSHOT_VERSION" >> $GITHUB_ENV
 
       - name: Publish npm snapshot package
         run: pnpm run publish:snapshot
