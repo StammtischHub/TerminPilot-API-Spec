@@ -13,6 +13,7 @@ jobs:
 
     steps:
       - uses: actions/github-script@v9
+        name: Cleanup preview packages from closed/merged PR
         with:
           script: |
             const prNumber = context.issue.number;

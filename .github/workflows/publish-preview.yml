@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check if src/ changed compared to main
+      - name: Check if relevant files have changed compared to main
         id: check
         run: |
           CHANGED=$(git diff origin/main...HEAD -- src/ package.json | head -1)
@@ -35,7 +35,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check for relevant changes without version bump
+      - name: Check for missing version bump on relevant changes
         run: |
           if [ "${{ needs.check-relevant-changes.outputs.relevant_changes }}" = "false" ]; then
             echo "✅ No api relevant files have changed, skipping version bump check."
@@ -78,6 +78,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - run: pnpm install --frozen-lockfile
+        name: Install dependencies
 
       - name: Set preview version
         run: |
@@ -93,6 +94,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/maven-deploy
+        name: Publish Maven preview package
         with:
           file: ${{ github.workspace }}/dist/openapi.bundled.yaml
           pom-file: ${{ github.workspace }}/.github/maven/maven-deploy-pom.xml
@@ -101,5 +103,6 @@ jobs:
           github-actor: ${{ github.actor }}
 
       - uses: ./.github/actions/print-package-info
+        name: Print package info to github step summary
         with:
           package_version: ${{ env.PREVIEW_VERSION }}
