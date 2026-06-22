@@ -11,7 +11,7 @@ jobs:
   check-relevant-changes:
     runs-on: ubuntu-latest
     outputs:
-      relevant_changes: ${{ steps.check.outputs.src_changes }}
+      relevant_changes: ${{ steps.check.outputs.relevant_changes }}
     steps:
       - uses: actions/checkout@v7
         with:
