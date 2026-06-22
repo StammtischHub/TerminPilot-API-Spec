@@ -8,8 +8,28 @@ on:
       - reopened
 
 jobs:
+  check-relevant-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      relevant_changes: ${{ steps.check.outputs.src_changes }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check if src/ changed compared to main
+        id: check
+        run: |
+          CHANGED=$(git diff origin/main...HEAD -- src/ package.json | head -1)
+          if [ -n "$CHANGED" ]; then
+            echo "relevant_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "relevant_changes=false" >> $GITHUB_OUTPUT
+          fi
+
   check-version-bump:
     runs-on: ubuntu-latest
+    needs: check-relevant-changes
     steps:
       - uses: actions/checkout@v7
         with:
@@ -17,29 +37,30 @@ jobs:
 
       - name: Check for relevant changes without version bump
         run: |
+          if [ "${{ needs.check-relevant-changes.outputs.relevant_changes }}" = "false" ]; then
+            echo "✅ No api relevant files have changed, skipping version bump check."
+            exit 0
+          fi
+
           VERSION_MAIN=$(git show origin/main:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null)
           VERSION_BRANCH=$(node -p "require('./package.json').version")
-          
+
           echo "Version on main:   $VERSION_MAIN"
           echo "Version on branch: $VERSION_BRANCH"
-          
+
           if [ "$VERSION_MAIN" = "$VERSION_BRANCH" ]; then
-            CHANGED=$(git diff origin/main...HEAD -- src/ | head -1)
-          
-            if [ -n "$CHANGED" ]; then
-              echo "⚠️  Api Relevant files have changed, but the version in package.json is still $VERSION_BRANCH"
-              echo "Please execute 'pnpm version patch/minor/major' to bump the version."
-              exit 1
-            else
-              echo "✅ No api relevant files have changed, skipping version bump check."
-            fi
+            echo "⚠️ Api relevant files have changed, but the version in package.json is still $VERSION_BRANCH"
+            echo "Please execute 'pnpm version patch/minor/major' to bump the version."
+            exit 1
           else
             echo "✅ Version was bumped from $VERSION_MAIN to $VERSION_BRANCH."
           fi
 
   publish-preview:
     runs-on: ubuntu-latest
-    needs: check-version-bump
+    needs:
+      - check-relevant-changes
+    if: needs.check-relevant-changes.outputs.relevant_changes == 'true'
     permissions:
       contents: read
       packages: write

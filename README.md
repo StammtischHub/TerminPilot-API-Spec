@@ -2,12 +2,16 @@
 
 OpenAPI specification for the TerminPilot API. This repository manages the spec as a versioned artifact and automatically publishes it as both an npm and Maven package via GitHub Packages.
 
+---
+
 ## Overview
 
 The specification is based on **OpenAPI** and is validated and bundled using [Redocly CLI](https://redocly.com/docs/cli/). The resulting bundle (`dist/openapi.bundled.yaml`) is published as an artifact to two package registries:
 
 - **npm** – `@stammtischhub/terminpilot-api-spec` (GitHub Packages)
 - **Maven** – `de.stammtischhub:terminpilot-api-spec` (GitHub Packages, packaging: `yaml`)
+
+---
 
 ## Prerequisites
 
@@ -18,6 +22,8 @@ The specification is based on **OpenAPI** and is validated and bundled using [Re
 npm install -g pnpm
 pnpm install
 ```
+---
+
 
 ## Local Development
 
@@ -63,6 +69,8 @@ pnpm version major
 
 > **Important:** Any pull request that contains changes under `src/` **must** include a version bump in `package.json`. `check-version-bump` in the CI workflow enforces this and will fail if the version is unchanged.
 
+---
+
 ## CI/CD Workflows
 
 ### 1. Publish Preview (`publish-preview.yml`)
@@ -71,8 +79,9 @@ pnpm version major
 
 **Steps:**
 
-1. Checks whether the version in `package.json` has been bumped if needed
-2. If true, a preview version of the api spec is published to GitHub Packages with the format:
+1. Checks whether the PR contains changes under `src/` or inside `package.json`. If not, the publish run is skipped to save resources.
+2. Checks whether the version in `package.json` has been bumped if needed
+3. If relevant files have changed, a preview version of the api spec is published to GitHub Packages with the format:
    `<base-version>-pr-<PR-number>-<short SHA>`
    e.g. `1.2.3-pr-42-a1b2c3d`
 
@@ -95,9 +104,13 @@ Preview packages are consumable via the `preview` dist-tag (npm) or the preview 
 
 1. All preview versions of the api spec from the closed MR are deleted from GitHub Packages — both from the npm registry and from the Maven registry.
 
+---
+
 ## Dependency Updates with Renovate
 
 Renovate is configured inside the `renovate.json` and automatically updates the present dependencies.
+
+---
 
 ## Notes
 
