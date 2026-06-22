@@ -73,7 +73,7 @@ pnpm version major
 
 ## CI/CD Workflows
 
-### 1. Publish Preview (`publish-preview.yml`)
+### 1. Publish Preview (`publish-snapshot.yml`)
 
 **Trigger:** A pull request is opened, synchronized, or reopened.
 
@@ -81,11 +81,11 @@ pnpm version major
 
 1. Checks whether the PR contains changes under `src/` or inside `package.json`. If not, the publish run is skipped to save resources.
 2. Checks whether the version in `package.json` has been bumped if needed
-3. If relevant files have changed, a preview version of the api spec is published to GitHub Packages with the format:
+3. If relevant files have changed, a snapshot version of the api spec is published to GitHub Packages with the format:
    `<base-version>-pr-<PR-number>-<short SHA>`
    e.g. `1.2.3-pr-42-a1b2c3d`
 
-Preview packages are consumable via the `preview` dist-tag (npm) or the preview version string (Maven).
+Preview packages are consumable via the `snapshot` dist-tag (npm) or the snapshot version string (Maven).
 
 ### 2. Publish Release (`publish-release.yml`)
 
@@ -96,13 +96,13 @@ Preview packages are consumable via the `preview` dist-tag (npm) or the preview 
 1. Checks whether a Git tag `v<version>` already exists for the current version. If it does, the publish run is skipped to prevent duplicate releases.
 2. If the version does NOT already exist, the release version of the api spec is published to GitHub Packages — both the npm registry and the Maven registry — with the version from `package.json`.
 
-### 3. Cleanup Preview (`cleanup-preview.yml`)
+### 3. Cleanup Preview (`cleanup-snapshots.yml`)
 
 **Trigger:** A pull request is closed (merged or abandoned).
 
 **Steps:**
 
-1. All preview versions of the api spec from the closed MR are deleted from GitHub Packages — both from the npm registry and from the Maven registry.
+1. All snapshot versions of the api spec from the closed MR are deleted from GitHub Packages — both from the npm registry and from the Maven registry.
 
 ---
 

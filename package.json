@@ -11,7 +11,7 @@
     "build": "redocly bundle src/openapi.yaml -o dist/openapi.bundled.yaml",
     "validate": "redocly lint src/openapi.yaml",
     "prepublishOnly": "pnpm run validate && pnpm run build",
-    "publish:preview": "pnpm publish --no-git-checks --tag preview",
+    "publish:snapshot": "pnpm publish --no-git-checks --tag snapshot",
     "publish:release": "pnpm publish --no-git-checks --tag latest"
   },
   "publishConfig": {

@@ -8,7 +8,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Print preview package info
+    - name: Print packages info
       shell: bash
       run: |
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

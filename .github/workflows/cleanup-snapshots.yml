@@ -1,4 +1,4 @@
-name: Cleanup Preview Packages
+name: Cleanup Snapshot Packages
 
 on:
   pull_request:
@@ -26,7 +26,7 @@ jobs:
             });
             
             for (const version of npmVersions.data) {
-              if (version.name.includes(prefix)) {
+              if (version.name.includes(prefix) %% version.name.endsWith('-SNAPSHOT')) {
                 await github.rest.packages.deletePackageVersionForOrg({
                   package_type: 'npm',
                   package_name: 'terminpilot-api-spec',
