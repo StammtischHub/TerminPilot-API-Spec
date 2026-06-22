@@ -82,8 +82,8 @@ pnpm version major
 1. Checks whether the PR contains changes under `src/` or inside `package.json`. If not, the publish run is skipped to save resources.
 2. Checks whether the version in `package.json` has been bumped if needed
 3. If relevant files have changed, a preview version of the api spec is published to GitHub Packages with the format:
-   `<base-version>-pr-<PR-number>-<short SHA>`
-   e.g. `1.2.3-pr-42-a1b2c3d`
+   `<base-version>-pr.<PR-number>.<short SHA>`
+   e.g. `1.2.3-pr.42.a1b2c3d`
 
 Preview packages are consumable via the `preview` dist-tag (npm) or the preview version string (Maven).
 
