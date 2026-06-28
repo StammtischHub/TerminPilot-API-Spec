@@ -20,7 +20,7 @@ jobs:
       - name: Check if relevant files have changed compared to main
         id: check
         run: |
-          CHANGED=$(git diff origin/main...HEAD -- src/ package.json | head -1)
+          CHANGED=$(git diff origin/main...HEAD -- src/ | head -1)
           if [ -n "$CHANGED" ]; then
             echo "relevant_changes=true" >> $GITHUB_OUTPUT
           else
