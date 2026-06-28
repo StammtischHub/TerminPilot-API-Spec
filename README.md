@@ -79,7 +79,7 @@ pnpm version major
 
 **Steps:**
 
-1. Checks whether the PR contains changes under `src/` or inside `package.json`. If not, the publish run is skipped to save resources.
+1. Checks if the PR contains changes under `src/`. If not, the publish run is skipped to save resources.
 2. Checks whether the version in `package.json` has been bumped if needed
 3. If relevant files have changed, a preview version of the api spec is published to GitHub Packages with the format:
    `<base-version>-pr.<PR-number>.<short SHA>`
