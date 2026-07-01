@@ -37,8 +37,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v6
         with:
