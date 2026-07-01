@@ -1,0 +1,20 @@
+Termin:
+  type: object
+  properties:
+    id:
+      type: integer
+    titel:
+      type: string
+    datum:
+      type: string
+      format: date-time
+
+CreateTerminRequest:
+  type: object
+  required: [titel, datum]
+  properties:
+    titel:
+      type: string
+    datum:
+      type: string
+      format: date-time
