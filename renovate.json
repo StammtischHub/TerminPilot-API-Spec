@@ -18,12 +18,12 @@
   },
   "packageRules": [
     {
-      "description": "Warte 3 Tage bevor ein Update eingespielt wird",
+      "description": "Wait 3 days before updating dependencies",
       "matchPackagePatterns": ["*"],
       "minimumReleaseAge": "3 days"
     },
     {
-      "description": "Major Updates: PR erstellen, aber kein Auto-Merge",
+      "description": "Major Updates: Create PR, but no Auto-Merge",
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "labels": ["renovate", "major update"]

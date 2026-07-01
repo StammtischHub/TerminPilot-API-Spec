@@ -56,10 +56,25 @@ jobs:
             echo "✅ Version was bumped from $VERSION_MAIN to $VERSION_BRANCH."
           fi
 
+  lint-api-spec:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - run: pnpm validate
+        name: Lint API spec
+
   publish-preview:
     runs-on: ubuntu-latest
     needs:
       - check-relevant-changes
+      - lint-api-spec
     if: needs.check-relevant-changes.outputs.relevant_changes == 'true'
     permissions:
       contents: read
