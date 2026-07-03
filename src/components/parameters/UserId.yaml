@@ -1,0 +1,8 @@
+name: userId
+in: query
+required: true
+description: ID of the user whose calendar events should be retrieved
+schema:
+  type: integer
+  format: int64
+  example: 42

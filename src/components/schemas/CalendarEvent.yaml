@@ -1,0 +1,26 @@
+type: object
+description: A single calendar event/appointment
+properties:
+  title:
+    type: string
+    description: Title of the appointment
+  start:
+    type: string
+    description: Start time of the appointment (ISO-8601 format, from LocalDateTime)
+    example: '2026-07-03T09:00:00'
+  end:
+    type: string
+    description: End time of the appointment (ISO-8601 format, from LocalDateTime)
+    example: '2026-07-03T10:00:00'
+  location:
+    type: string
+    description: Location of the appointment
+  description:
+    type: string
+    description: Description of the appointment
+required:
+  - title
+  - start
+  - end
+  - location
+  - description
