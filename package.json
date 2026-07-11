@@ -18,7 +18,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@redocly/cli": "2.37.0",
+    "@redocly/cli": "2.38.0",
     "js-yaml": "^5.0.0"
   }
 }
