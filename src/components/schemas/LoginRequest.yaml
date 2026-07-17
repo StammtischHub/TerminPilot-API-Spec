@@ -9,4 +9,4 @@ properties:
     description: The username
   password:
     type: string
-    description: The hashed password of the user
+    description: The password for the username

@@ -2,7 +2,7 @@ description: User information
 type: object
 required:
   - username
-  - role
+  - roles
 properties:
   username:
     type: string
