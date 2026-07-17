@@ -1,0 +1,5 @@
+description: The role of the user
+type: string
+enum:
+  - admin
+  - user

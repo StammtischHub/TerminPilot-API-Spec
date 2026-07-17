@@ -1,0 +1,8 @@
+post:
+  tags:
+    - Auth
+  summary: Logs the user out of the system
+  operationId: logout
+  responses:
+    '204':
+      description: Logged out successfully

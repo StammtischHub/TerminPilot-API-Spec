@@ -1,0 +1,14 @@
+get:
+  tags:
+    - Auth
+  summary: Retrieves the currently logged in user
+  operationId: me
+  responses:
+    '200':
+      description: User retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/UserResponse.yaml'
+    '401':
+      description: Not authenticated

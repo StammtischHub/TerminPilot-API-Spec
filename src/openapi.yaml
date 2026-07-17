@@ -7,4 +7,16 @@ servers:
   - url: http://localhost:8080
     description: Local Development
 
-paths: { }
+tags:
+  - name: Auth
+    description: Endpoints for authentication
+
+paths:
+  /api/auth/login:
+    $ref: './paths/auth/login.yaml'
+
+  /api/auth/logout:
+    $ref: './paths/auth/logout.yaml'
+
+  /api/auth/me:
+    $ref: './paths/auth/me.yaml'
