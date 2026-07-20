@@ -1,0 +1,13 @@
+description: User information
+type: object
+required:
+  - username
+  - roles
+properties:
+  username:
+    type: string
+    description: The username of the logged in user
+  roles:
+    type: array
+    items:
+      $ref: './UserRole.yaml'
