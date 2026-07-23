@@ -1,0 +1,22 @@
+post:
+  tags:
+    - Auth
+  summary: Registers a new user
+  operationId: register
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/RegisterRequest.yaml'
+  responses:
+    '201':
+      description: User registered successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/UserResponse.yaml'
+    '400':
+      description: Validation failed
+    '409':
+      description: Username is already taken

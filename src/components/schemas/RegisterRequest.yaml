@@ -1,0 +1,18 @@
+description: Registration request
+type: object
+required:
+  - username
+  - password
+properties:
+  username:
+    type: string
+    minLength: 3
+    maxLength: 30
+    pattern: '^[a-zA-Z0-9._-]+$'
+    description: The desired username
+  password:
+    type: string
+    format: password
+    minLength: 12
+    maxLength: 72
+    description: The user's password (plain text, protected by TLS)

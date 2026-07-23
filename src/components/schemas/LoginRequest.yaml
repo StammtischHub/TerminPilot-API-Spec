@@ -1,0 +1,14 @@
+description: Login Request
+type: object
+required:
+  - username
+  - password
+properties:
+  username:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]+$'
+    description: The username
+  password:
+    type: string
+    format: password
+    description: The password for the username

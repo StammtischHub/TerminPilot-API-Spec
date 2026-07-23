@@ -1,6 +1,6 @@
 {
   "name": "@stammtischhub/terminpilot-api-spec",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "OpenAPI Spec für TerminPilot",
   "main": "dist/openapi.bundled.yaml",
   "files": [
@@ -18,8 +18,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@redocly/cli": "2.38.0",
+    "@redocly/cli": "2.39.0",
     "js-yaml": "^5.0.0"
   },
-  "packageManager": "pnpm@11.10.0"
+  "packageManager": "pnpm@11.11.0"
 }
