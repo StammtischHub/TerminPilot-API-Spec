@@ -8,6 +8,8 @@ servers:
     description: Local Development
 
 tags:
+  - name: Calendar
+    description: Operations related to a user's calendar api
   - name: Auth
     description: Endpoints for authentication
 
@@ -23,3 +25,6 @@ paths:
 
   /api/auth/me:
     $ref: './paths/auth/me.yaml'
+    
+  /api/calendar/events:
+    $ref: './paths/events.yaml'
