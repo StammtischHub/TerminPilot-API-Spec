@@ -1,0 +1,19 @@
+description: User group information
+type: object
+required:
+  - id
+  - name
+  - roles
+properties:
+  id:
+    type: integer
+    description: The unique identifier of the user group
+  name:
+    type: string
+    description: The name of the group
+  members:
+    type: array
+    items:
+      type: number
+      description: The ID of a user in the group
+    description: The list of user IDs that are members of the group

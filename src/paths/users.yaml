@@ -1,0 +1,14 @@
+get:
+  tags:
+    - Users
+  summary: Retrieve all users in the system.
+  operationId: getUsers
+  responses:
+    '200':
+      description: A list of users
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/responses/UserResponse.yaml'
