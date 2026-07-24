@@ -65,6 +65,9 @@ jobs:
 
       - uses: pnpm/action-setup@v6
 
+      - run: pnpm build
+        name: Build API spec
+
       - run: pnpm validate
         name: Lint API spec
 
