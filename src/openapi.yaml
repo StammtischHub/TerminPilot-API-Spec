@@ -10,6 +10,10 @@ servers:
 tags:
   - name: Auth
     description: Endpoints for authentication
+  - name: User Groups
+    description: Endpoints for managing user groups
+  - name: Users
+    description: Endpoints for managing users
   - name: Event
     description: Endpoints for Events
   - name: Google
@@ -36,3 +40,15 @@ paths:
 
   /api/google/callback:
     $ref: './paths/google/callback.yaml'
+
+  /api/user-groups:
+    $ref: './paths/user-groups.yaml'
+
+  /api/user-groups/{user-group-id}:
+    $ref: './paths/user-groups/{user-group-id}.yaml'
+
+  /api/users:
+    $ref: './paths/users.yaml'
+
+  /api/users/{user-id}/user-groups:
+    $ref: './paths/users/{user-id}/user-groups.yaml'

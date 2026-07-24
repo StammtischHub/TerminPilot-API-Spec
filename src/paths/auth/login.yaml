@@ -7,7 +7,8 @@ post:
     required: true
     content:
       application/json:
-        schema: { $ref: '../../components/schemas/requests/LoginRequest.yaml' }
+        schema:
+          $ref: '../../components/schemas/requests/LoginRequest.yaml'
   responses:
     '200':
       description: Login successful
