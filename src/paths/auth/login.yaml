@@ -7,13 +7,13 @@ post:
     required: true
     content:
       application/json:
-        schema: { $ref: '../../components/schemas/LoginRequest.yaml' }
+        schema: { $ref: '../../components/schemas/requests/LoginRequest.yaml' }
   responses:
     '200':
       description: Login successful
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/UserResponse.yaml'
+            $ref: '../../components/schemas/responses/UserResponse.yaml'
     '401':
       description: Invalid login credentials
