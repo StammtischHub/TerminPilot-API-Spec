@@ -10,6 +10,10 @@ servers:
 tags:
   - name: Auth
     description: Endpoints for authentication
+  - name: User Groups
+    description: Endpoints for managing user groups
+  - name: Users
+    description: Endpoints for managing users
 
 paths:
   /api/auth/register:
@@ -23,3 +27,15 @@ paths:
 
   /api/auth/me:
     $ref: './paths/auth/me.yaml'
+
+  /api/user-groups:
+    $ref: './paths/user-groups.yaml'
+
+  /api/user-groups/{user-group-id}:
+    $ref: './paths/user-groups/{user-group-id}.yaml'
+
+  /api/users:
+    $ref: './paths/users.yaml'
+
+  /api/users/{user-id}/user-groups:
+    $ref: './paths/users/{user-id}/user-groups.yaml'

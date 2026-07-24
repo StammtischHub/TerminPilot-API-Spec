@@ -1,0 +1,41 @@
+delete:
+  tags:
+    - User Groups
+  summary: Delete a user group by its ID
+  operationId: deleteUserGroup
+  parameters:
+    - name: user-group-id
+      in: path
+      required: true
+      description: The ID of the user group to delete
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: User group deleted successfully
+
+patch:
+  tags:
+    - User Groups
+  summary: Update a user group by its ID
+  operationId: updateUserGroup
+  parameters:
+    - name: user-group-id
+      in: path
+      required: true
+      description: The ID of the user group to update
+      schema:
+          type: integer
+  requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/requests/UserGroupRequest.yaml'
+  responses:
+    '200':
+      description: User group updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/responses/UserGroupResponse.yaml'

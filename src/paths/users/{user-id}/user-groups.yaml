@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Users
+    - User Groups
+  summary: Retrieves all user groups of a specific user by their ID
+  operationId: getUserGroupsByUserId
+  parameters:
+    - name: user-id
+      in: path
+      required: true
+      description: The ID of the user whose groups are to be retrieved
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A list of user groups that the user belongs to
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../../components/schemas/responses/UserGroupResponse.yaml'

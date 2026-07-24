@@ -1,0 +1,20 @@
+post:
+  tags:
+    - User Groups
+  summary: Create a new user group
+  operationId: createUserGroup
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/requests/UserGroupRequest.yaml'
+  responses:
+    '201':
+      description: User group created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/UserGroupResponse.yaml'
+    '400':
+      description: Invalid user group data provided
