@@ -1,13 +1,18 @@
 description: User information
 type: object
 required:
+  - id
   - username
   - roles
 properties:
+  id:
+    type: integer
+    description: The unique identifier of the logged in user
   username:
     type: string
     description: The username of the logged in user
   roles:
     type: array
+    description: The roles assigned to the logged in user
     items:
-      $ref: './UserRole.yaml'
+      $ref: '../UserRole.yaml'
