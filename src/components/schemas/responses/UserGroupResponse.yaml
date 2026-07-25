@@ -7,6 +7,7 @@ required:
 properties:
   id:
     type: integer
+    format: int64
     description: The unique identifier of the user group
   name:
     type: string
@@ -14,6 +15,7 @@ properties:
   members:
     type: array
     items:
-      type: number
+      type: integer
+      format: int64
       description: The ID of a user in the group
     description: The list of user IDs that are members of the group
