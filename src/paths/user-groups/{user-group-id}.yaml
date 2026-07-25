@@ -10,6 +10,7 @@ delete:
       description: The ID of the user group to delete
       schema:
         type: integer
+        format: int64
   responses:
     '204':
       description: User group deleted successfully
@@ -26,6 +27,7 @@ patch:
       description: The ID of the user group to update
       schema:
           type: integer
+          format: int64
   requestBody:
       required: true
       content:
