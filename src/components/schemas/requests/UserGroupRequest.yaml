@@ -11,4 +11,5 @@ properties:
     type: array
     description: List of user IDs to be added to the group
     items:
-      type: number
+      type: integer
+      format: int64
