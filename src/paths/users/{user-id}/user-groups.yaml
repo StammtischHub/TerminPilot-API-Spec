@@ -1,7 +1,6 @@
 get:
   tags:
     - Users
-    - User Groups
   summary: Retrieves all user groups of a specific user by their ID
   operationId: getUserGroupsByUserId
   parameters:
