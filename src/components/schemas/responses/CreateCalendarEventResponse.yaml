@@ -1,0 +1,22 @@
+description: Details of the created external calendar event
+type: object
+required:
+  - uid
+  - resourceHref
+  - start
+  - end
+properties:
+  uid:
+    type: string
+    description: Unique identifier of the created event
+  resourceHref:
+    type: string
+    description: Resource URI of the created event
+  start:
+    type: string
+    format: date-time
+    description: Start timestamp of the created event
+  end:
+    type: string
+    format: date-time
+    description: End timestamp of the created event
