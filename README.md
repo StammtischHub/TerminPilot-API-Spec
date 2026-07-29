@@ -33,7 +33,7 @@ pnpm install
 pnpm run validate
 ```
 
-This command lints the api spec using redocly and ensures that all required fields are present. Lint rules are configured in `redocly.yaml`.
+This command lints `src/openapi.yaml` and `dist/openapi.bundled.yaml` using redocly and ensures that all required fields are present. Lint rules are configured in `redocly.yaml`.
 
 ### Build the bundle
 

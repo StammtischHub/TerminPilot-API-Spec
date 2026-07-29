@@ -8,14 +8,14 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/RegisterRequest.yaml'
+          $ref: '../../components/schemas/requests/RegisterRequest.yaml'
   responses:
     '201':
       description: User registered successfully
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/UserResponse.yaml'
+            $ref: '../../components/schemas/responses/UserResponse.yaml'
     '400':
       description: Validation failed
     '409':
