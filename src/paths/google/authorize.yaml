@@ -1,0 +1,16 @@
+get:
+  tags:
+    - Google
+  summary: Initiates the Google OAuth 2.0 authorization flow.
+  operationId: authorize
+  responses:
+    '302':
+      description: Redirect to Google OAuth Consent Screen.
+      headers:
+        Location:
+          description: Google OAuth Authorization URL
+          schema:
+            type: string
+            format: uri
+    '401':
+      description: Not authenticated.

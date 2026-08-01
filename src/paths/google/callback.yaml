@@ -1,0 +1,29 @@
+get:
+  tags:
+    - Google
+  summary: Continues the Google OAuth 2.0 authorization flow with the access/refresh tokens.
+  operationId: Google
+  parameters:
+    - name: code
+      in: query
+      required: true
+      description: The one-time authorization code issued by Google.
+      schema:
+        type: string
+      example: 4/0AY0e-g7...
+    - name: state
+      in: query
+      required: true
+      description: >
+        The user ID encoded during `/authorize`, used to associate the
+        tokens with the correct account.
+      schema:
+        type: string
+      example: "12345"
+  responses:
+    '200':
+      description: OAuth connection successfully established and tokens stored.
+    '400':
+      description: >
+        Invalid request, e.g. if `state` is not a valid numeric user ID
+        or the authorization code is invalid/expired.
