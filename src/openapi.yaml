@@ -10,6 +10,8 @@ servers:
 tags:
   - name: Auth
     description: Endpoints for authentication
+  - name: Event
+    description: Endpoints for Events
 
 paths:
   /api/auth/register:
@@ -23,3 +25,6 @@ paths:
 
   /api/auth/me:
     $ref: './paths/auth/me.yaml'
+
+  /api/evet/suggestions:
+    $ref: './paths/event/suggestions.yaml'

@@ -1,0 +1,15 @@
+type: object
+required: [participantId, reason]
+properties:
+  participantId:
+    type: integer
+    format: int64
+    example: 42
+  reason:
+    type: string
+    enum: [not_connected, reauth_required, provider_unavailable, timeout]
+    description: |
+      - not_connected: participant has never authorized calendar access.
+      - reauth_required: refresh token is invalid or has been revoked.
+      - provider_unavailable: calendar provider returned an error.
+      - timeout: calendar provider did not respond in time.
