@@ -29,10 +29,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/CalendarAccessErrorResponse.yaml'
+            $ref: '../../components/schemas/errors/CalendarAccessFailure.yaml'
     '504':
       description: Timed out while fetching a participant's calendar
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/CalendarAccessErrorResponse.yaml'
+            $ref: '../../components/schemas/errors/CalendarAccessFailure.yaml'

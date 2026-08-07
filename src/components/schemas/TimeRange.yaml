@@ -3,9 +3,9 @@ required: [start, end]
 properties:
   start:
     type: string
-    pattern: '^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$'
-    example: "09:00:00"
+    pattern: '^([01]\d|2[0-3]):[0-5]\d$'
+    example: "09:00"
   end:
     type: string
-    pattern: '^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$'
-    example: "17:00:00"
+    pattern: '^([01]\d|2[0-3]):[0-5]\d$'
+    example: "17:00"
