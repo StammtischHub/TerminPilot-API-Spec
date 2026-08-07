@@ -1,0 +1,11 @@
+type: object
+required: [start, end]
+properties:
+  start:
+    type: string
+    format: date
+    example: "2026-08-10"
+  end:
+    type: string
+    format: date
+    example: "2026-08-21"

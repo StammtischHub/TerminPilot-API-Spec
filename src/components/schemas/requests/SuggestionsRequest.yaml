@@ -1,0 +1,13 @@
+type: object
+required: [constraints, participants]
+properties:
+  constraints:
+    $ref: '../Constraints.yaml'
+  participants:
+    type: array
+    minItems: 1
+    items:
+      participantId:
+        type: integer
+        format: int64
+        example: 1234
