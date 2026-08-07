@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/UserSchema.yaml'
+            $ref: '../../components/schemas/responses/UserResponse.yaml'
     '400':
       description: Validation failed
     '409':

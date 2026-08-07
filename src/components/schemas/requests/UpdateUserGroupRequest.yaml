@@ -1,0 +1,18 @@
+description: Request schema for updating a user group
+type: object
+required:
+  - id
+properties:
+  id:
+    type: integer
+    format: int64
+    description: The unique identifier of the user group to be updated
+  name:
+    type: string
+    description: The new name of the user group (optional)
+  member-ids:
+    type: array
+    description: List of user IDs to be added or removed from the group (optional)
+    items:
+      type: integer
+      format: int64

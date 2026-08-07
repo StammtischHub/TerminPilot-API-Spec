@@ -15,6 +15,6 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/UserGroupSchema.yaml'
+            $ref: '../components/schemas/responses/UserGroupResponse.yaml'
     '400':
       description: Invalid user group data provided
