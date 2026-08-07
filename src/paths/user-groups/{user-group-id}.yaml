@@ -33,11 +33,11 @@ patch:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/requests/UserGroupRequest.yaml'
+            $ref: '../../components/schemas/UserGroupSchema.yaml'
   responses:
     '200':
       description: User group updated successfully
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/UserGroupResponse.yaml'
+            $ref: '../../components/schemas/UserGroupSchema.yaml'

@@ -9,6 +9,6 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/UserResponse.yaml'
+            $ref: '../../components/schemas/UserSchema.yaml'
     '401':
       description: Not authenticated

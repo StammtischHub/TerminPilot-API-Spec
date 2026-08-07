@@ -1,9 +1,0 @@
-description: Calculated Event Suggestions
-type: object
-required: [suggestions]
-properties:
-  suggestions:
-    type: array
-    description: Top-N suggestions, ordered best first (ranking is implicit in array order)
-    items:
-      $ref: '../Suggestion.yaml'

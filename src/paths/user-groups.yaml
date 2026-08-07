@@ -8,13 +8,13 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../components/schemas/requests/UserGroupRequest.yaml'
+          $ref: '../components/schemas/requests/CreateUserGroupRequest.yaml'
   responses:
     '201':
       description: User group created successfully
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/responses/UserGroupResponse.yaml'
+            $ref: '../components/schemas/UserGroupSchema.yaml'
     '400':
       description: Invalid user group data provided

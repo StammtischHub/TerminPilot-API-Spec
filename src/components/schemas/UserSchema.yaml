@@ -16,4 +16,4 @@ properties:
     type: array
     description: The roles assigned to the logged in user
     items:
-      $ref: '../UserRole.yaml'
+      $ref: './UserRole.yaml'

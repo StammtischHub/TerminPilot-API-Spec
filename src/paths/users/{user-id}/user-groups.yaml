@@ -19,4 +19,4 @@ get:
           schema:
             type: array
             items:
-              $ref: '../../../components/schemas/responses/UserGroupResponse.yaml'
+              $ref: '../../../components/schemas/UserGroupSchema.yaml'
