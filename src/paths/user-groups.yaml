@@ -18,3 +18,33 @@ post:
             $ref: '../components/schemas/responses/UserGroupResponse.yaml'
     '400':
       description: Invalid user group data provided
+
+get:
+  tags:
+    - User Groups
+  summary: Retrieve information of user groups
+  operationId: getUserGroups
+  parameters:
+    - in: query
+      name: userId
+      schema:
+        type: integer
+        format: int64
+      required: false
+      description: The userId of the user to retrieve the user groups from
+    - in: query
+      name: userGroupId
+      schema:
+        type: integer
+        format: int64
+      required: false
+      description: The userGroupId of the user group to retrieve information from
+  responses:
+    '200':
+      description: A list of user groups
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/responses/UserGroupResponse.yaml'

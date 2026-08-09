@@ -49,6 +49,3 @@ paths:
 
   /api/users:
     $ref: './paths/users.yaml'
-
-  /api/users/{user-id}/user-groups:
-    $ref: './paths/users/{user-id}/user-groups.yaml'
