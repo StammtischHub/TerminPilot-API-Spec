@@ -1,4 +1,4 @@
-description: Details of the created external calendar event
+description: Creation receipt for an external calendar event
 type: object
 required:
   - uid

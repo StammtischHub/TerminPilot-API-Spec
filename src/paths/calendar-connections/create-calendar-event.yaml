@@ -17,7 +17,7 @@ post:
       schema:
         type: string
         format: uuid
-      description: The external calendar identifier
+      description: The TerminPilot identifier of the selected external calendar
   requestBody:
     required: true
     content:
