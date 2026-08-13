@@ -1,0 +1,33 @@
+type: object
+required: [title, start, end, participants]
+properties:
+  title:
+    type: string
+    description: Name of the Event
+    example: "My great Event"
+  start:
+    type: string
+    format: date-time
+    description: Event start time
+    example: "2026-08-12T14:00:00"
+  end:
+    type: string
+    format: date-time
+    description: Suggested end time
+    example: "2026-08-12T14:30:00"
+  participants:
+    type: array
+    minItems: 1
+    items:
+      participantId:
+        type: integer
+        format: int64
+        example: 1234
+  location:
+    type: string
+    description: The place where the Event takes place
+    example: "742 Evergreen Terrace, Springfield"
+  notes:
+    type: string
+    description: Free‑text field for additional comments, instructions, or contextual information related to this item.
+    example: "bring some beers"

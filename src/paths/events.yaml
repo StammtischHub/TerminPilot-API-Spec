@@ -1,0 +1,38 @@
+post:
+  tags:
+    - Event
+  summary: Create a Event for the given participants
+  operationId: createEvent
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/requests/CreateEventRequest.yaml'
+  responses:
+    '201':
+      description: Successfully created the event; all participant calendars were loaded
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/CreateEventResponse.yaml'
+    '400':
+      description: Validation failed – request body is structurally invalid
+    '401':
+      description: Caller is not authenticated
+    '404':
+      description: At least one of the given participant IDs does not exist in the system
+    '422':
+      description: Request body is structurally valid but not logically satisfiable (e.g. duration exceeds the time range)
+    '502':
+      description: Calendar access failed for at least one participant (not connected, authorization expired, or provider error)
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors/CalendarAccessFailure.yaml'
+    '504':
+      description: Timed out while fetching a participant's calendar
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors/CalendarAccessFailure.yaml'
