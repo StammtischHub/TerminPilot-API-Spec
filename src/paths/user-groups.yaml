@@ -3,6 +3,9 @@ post:
     - User Groups
   summary: Create a new user group
   operationId: createUserGroup
+  security:
+    - session-cookie: []
+      csrf-header: []
   requestBody:
     required: true
     content:

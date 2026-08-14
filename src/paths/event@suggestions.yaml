@@ -3,19 +3,22 @@ post:
     - Event
   summary: Receive suggestions for the event by the given constraints
   operationId: suggestions
+  security:
+    - session-cookie: []
+      csrf-header: []
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/requests/SuggestionsRequest.yaml'
+          $ref: '../components/schemas/requests/SuggestionsRequest.yaml'
   responses:
     '200':
       description: Successfully calculated suggestions; all participant calendars were loaded
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/SuggestionsResponse.yaml'
+            $ref: '../components/schemas/responses/SuggestionsResponse.yaml'
     '400':
       description: Validation failed – request body is structurally invalid
     '401':
@@ -29,10 +32,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/errors/CalendarAccessFailure.yaml'
+            $ref: '../components/schemas/errors/CalendarAccessFailure.yaml'
     '504':
       description: Timed out while fetching a participant's calendar
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/errors/CalendarAccessFailure.yaml'
+            $ref: '../components/schemas/errors/CalendarAccessFailure.yaml'
