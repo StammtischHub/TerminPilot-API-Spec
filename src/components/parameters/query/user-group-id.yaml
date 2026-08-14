@@ -1,0 +1,7 @@
+name: user-group-id
+in: query
+required: false
+description: The ID of the user group
+schema:
+  type: integer
+  format: int64

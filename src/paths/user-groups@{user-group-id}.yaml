@@ -7,7 +7,7 @@ delete:
     - session-cookie: []
       csrf-header: []
   parameters:
-    - $ref: '../components/parameters/user-group-id.yaml'
+    - $ref: '../components/parameters/path/user-group-id.yaml'
   responses:
     '204':
       description: User group deleted successfully
@@ -21,7 +21,7 @@ patch:
     - session-cookie: []
       csrf-header: []
   parameters:
-    - $ref: '../components/parameters/user-group-id.yaml'
+    - $ref: '../components/parameters/path/user-group-id.yaml'
   requestBody:
     required: true
     content:
