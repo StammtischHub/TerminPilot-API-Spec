@@ -35,7 +35,10 @@ paths:
   /api/auth/me:
     $ref: './paths/auth@me.yaml'
 
-  /api/evet/suggestions:
+  /api/events:
+    $ref: './paths/events.yaml'
+
+  /api/events/suggestions:
     $ref: './paths/event@suggestions.yaml'
 
   /api/google/authorize:
