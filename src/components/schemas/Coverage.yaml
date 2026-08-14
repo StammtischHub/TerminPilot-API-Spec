@@ -13,7 +13,6 @@ properties:
   missingParticipantIds:
     type: array
     items:
-      type: integer
-      format: int64
+      $ref: './ParticipantId.yaml'
     example: []
     description: Participants not available at this slot; empty array for a full match
