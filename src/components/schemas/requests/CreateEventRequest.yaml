@@ -3,26 +3,18 @@ required: [title, start, end, participants]
 properties:
   title:
     type: string
-    description: Name of the Event
     example: "Dinner with the Simpsons"
   start:
     type: string
     format: date-time
-    description: Event start time
-    example: "2026-08-12T19:00:00"
   end:
     type: string
     format: date-time
-    description: Suggested end time
-    example: "2026-08-12T20:30:00"
   participants:
     type: array
     minItems: 1
     items:
-      type: integer
-      format: int64
-      description: The unique identifier of the logged in user
-      example: 1234
+      $ref: '../ParticipantId.yaml'
   location:
     type: string
     description: The place where the Event takes place
