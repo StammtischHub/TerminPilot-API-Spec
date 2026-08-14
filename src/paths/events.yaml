@@ -12,6 +12,10 @@ post:
   responses:
     '201':
       description: Successfully created the event; all participant calendars were loaded
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Event.yaml'
     '400':
       description: Validation failed – request body is structurally invalid
     '401':

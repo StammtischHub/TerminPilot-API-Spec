@@ -6,4 +6,5 @@ properties:
     type: array
     description: Top-N suggestions, ordered best first (ranking is implicit in array order)
     items:
+      type: object
       $ref: '../Suggestion.yaml'
