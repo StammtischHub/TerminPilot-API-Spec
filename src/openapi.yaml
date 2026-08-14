@@ -39,7 +39,7 @@ paths:
     $ref: './paths/events.yaml'
 
   /api/events/suggestions:
-    $ref: './paths/event@suggestions.yaml'
+    $ref: './paths/events@suggestions.yaml'
 
   /api/google/authorize:
     $ref: './paths/google@authorize.yaml'
