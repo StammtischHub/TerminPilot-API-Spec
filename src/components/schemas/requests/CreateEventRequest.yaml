@@ -1,0 +1,10 @@
+allOf:
+  - $ref: '../EventCore.yaml'
+  - type: object
+    required: [participants]
+    properties:
+      participants:
+        type: array
+        minItems: 1
+        items:
+          $ref: '../ParticipantId.yaml'

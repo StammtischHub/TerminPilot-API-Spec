@@ -2,20 +2,23 @@ post:
   tags:
     - Event
   summary: Create a Event for the given participants
+  security:
+    - session-cookie: [ ]
+      csrf-header: [ ]
   operationId: createEvent
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../components/schemas/Event.yaml'
+          $ref: '../components/schemas/requests/CreateEventRequest.yaml'
   responses:
     '201':
       description: Successfully created the event; all participant calendars were loaded
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/Event.yaml'
+            $ref: '../components/schemas/responses/CreateEventResponse.yaml'
     '400':
       description: Validation failed – request body is structurally invalid
     '401':

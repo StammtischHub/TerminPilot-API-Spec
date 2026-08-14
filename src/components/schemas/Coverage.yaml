@@ -8,8 +8,7 @@ properties:
   availableParticipantIds:
     type: array
     items:
-      type: integer
-      format: int64
+      $ref: './ParticipantId.yaml'
     example: [12, 34, 56]
   missingParticipantIds:
     type: array
