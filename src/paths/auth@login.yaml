@@ -3,18 +3,20 @@ post:
     - Auth
   summary: Logs the user into the system
   operationId: login
+  security: []
   requestBody:
+    description: Login Request
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/requests/LoginRequest.yaml'
+          $ref: '../components/schemas/requests/LoginRequest.yaml'
   responses:
     '200':
       description: Login successful
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/UserResponse.yaml'
+            $ref: '../components/schemas/responses/UserResponse.yaml'
     '401':
       description: Invalid login credentials

@@ -1,11 +1,14 @@
 openapi: 3.1.2
 info:
   title: TerminPilot API
-  version: 1.3.0
+  version: 1.3.1
 
 servers:
   - url: http://localhost:8080
     description: Local Development
+
+security:
+  - session-cookie: []
 
 tags:
   - name: Auth
@@ -21,34 +24,41 @@ tags:
 
 paths:
   /api/auth/register:
-    $ref: './paths/auth/register.yaml'
+    $ref: './paths/auth@register.yaml'
 
   /api/auth/login:
-    $ref: './paths/auth/login.yaml'
+    $ref: './paths/auth@login.yaml'
 
   /api/auth/logout:
-    $ref: './paths/auth/logout.yaml'
+    $ref: './paths/auth@logout.yaml'
 
   /api/auth/me:
-    $ref: './paths/auth/me.yaml'
+    $ref: './paths/auth@me.yaml'
 
   /api/evet/suggestions:
-    $ref: './paths/event/suggestions.yaml'
+    $ref: './paths/event@suggestions.yaml'
 
   /api/google/authorize:
-    $ref: './paths/google/authorize.yaml'
+    $ref: './paths/google@authorize.yaml'
 
   /api/google/callback:
-    $ref: './paths/google/callback.yaml'
+    $ref: './paths/google@callback.yaml'
 
   /api/user-groups:
     $ref: './paths/user-groups.yaml'
 
   /api/user-groups/{user-group-id}:
-    $ref: './paths/user-groups/{user-group-id}.yaml'
+    $ref: './paths/user-groups@{user-group-id}.yaml'
 
   /api/users:
     $ref: './paths/users.yaml'
 
   /api/users/{user-id}/user-groups:
-    $ref: './paths/users/{user-id}/user-groups.yaml'
+    $ref: './paths/users@{user-id}@user-groups.yaml'
+
+components:
+  securitySchemes:
+    session-cookie:
+      $ref: './components/securitySchemes/session-cookie.yaml'
+    csrf-header:
+      $ref: './components/securitySchemes/csrf-header.yaml'

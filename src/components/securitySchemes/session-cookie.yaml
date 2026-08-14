@@ -1,0 +1,7 @@
+type: apiKey
+in: cookie
+name: JSESSIONID
+description: |
+  Session cookie issued on successful login (`POST /api/auth/login`).
+  The session ID is rotated on every login and invalidated on
+  `POST /api/auth/logout`.

@@ -3,19 +3,20 @@ post:
     - Auth
   summary: Registers a new user
   operationId: register
+  security: []
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/requests/RegisterRequest.yaml'
+          $ref: '../components/schemas/requests/RegisterRequest.yaml'
   responses:
     '201':
       description: User registered successfully
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/responses/UserResponse.yaml'
+            $ref: '../components/schemas/responses/UserResponse.yaml'
     '400':
       description: Validation failed
     '409':

@@ -1,0 +1,10 @@
+type: apiKey
+in: header
+name: X-XSRF-TOKEN
+description: |
+  CSRF token required on state-changing requests (POST, PATCH, DELETE)
+  outside of `/api/auth/**`. The current value is exposed via a
+  JavaScript-readable `XSRF-TOKEN` cookie that is (re-)issued with every
+  response and rotated on login; it must be echoed back in this header.
+  Endpoints under `/api/auth/**` (register, login, logout, me) are exempt
+  from this check.
