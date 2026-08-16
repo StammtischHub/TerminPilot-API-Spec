@@ -1,0 +1,9 @@
+type: object
+required: [id, name]
+properties:
+  id:
+    $ref: './UserId.yaml'
+  name:
+    type: string
+    description: Display name of the participant
+    example: "Homer Simpson"

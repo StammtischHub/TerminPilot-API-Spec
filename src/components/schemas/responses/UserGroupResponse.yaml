@@ -3,7 +3,7 @@ type: object
 required:
   - id
   - name
-  - member-ids
+  - memberIds
 properties:
   id:
     type: integer
@@ -12,7 +12,7 @@ properties:
   name:
     type: string
     description: The name of the group
-  member-ids:
+  memberIds:
     type: array
     items:
       type: integer

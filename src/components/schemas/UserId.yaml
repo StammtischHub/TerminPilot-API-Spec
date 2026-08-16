@@ -1,0 +1,4 @@
+type: integer
+format: int64
+description: Unique identifier of a participant
+example: 1234
