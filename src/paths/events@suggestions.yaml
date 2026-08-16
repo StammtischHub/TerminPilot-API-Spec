@@ -1,8 +1,8 @@
 post:
   tags:
     - Event
-  summary: Receive suggestions for the event by the given constraints
-  operationId: receiveSuggestions
+  summary: Get suggestions for the event by the given constraints
+  operationId: getSuggestions
   security:
     - session-cookie: []
       csrf-header: []
