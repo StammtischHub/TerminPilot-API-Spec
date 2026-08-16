@@ -2,7 +2,7 @@ post:
   tags:
     - Event
   summary: Receive suggestions for the event by the given constraints
-  operationId: suggestions
+  operationId: receiveSuggestions
   security:
     - session-cookie: []
       csrf-header: []

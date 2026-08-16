@@ -8,11 +8,11 @@ properties:
   availableParticipantIds:
     type: array
     items:
-      $ref: './ParticipantId.yaml'
+      $ref: './UserId.yaml'
     example: [12, 34, 56]
   missingParticipantIds:
     type: array
     items:
-      $ref: './ParticipantId.yaml'
+      $ref: './UserId.yaml'
     example: []
     description: Participants not available at this slot; empty array for a full match

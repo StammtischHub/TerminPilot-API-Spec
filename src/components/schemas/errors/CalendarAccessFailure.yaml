@@ -2,7 +2,7 @@ type: object
 required: [participantId, reason]
 properties:
   participantId:
-    $ref: '../ParticipantId.yaml'
+    $ref: '../UserId.yaml'
   reason:
     type: string
     enum: [not_connected, reauth_required, provider_unavailable, timeout]
