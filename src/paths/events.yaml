@@ -1,24 +1,24 @@
 post:
   tags:
     - Event
-  summary: Receive suggestions for the event by the given constraints
-  operationId: suggestions
+  summary: Create a Event for the given participants
   security:
-    - session-cookie: []
-      csrf-header: []
+    - session-cookie: [ ]
+      csrf-header: [ ]
+  operationId: createEvent
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../components/schemas/requests/SuggestionsRequest.yaml'
+          $ref: '../components/schemas/requests/CreateEventRequest.yaml'
   responses:
-    '200':
-      description: Successfully calculated suggestions; all participant calendars were loaded
+    '201':
+      description: Successfully created the event; all participant calendars were loaded
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/responses/SuggestionsResponse.yaml'
+            $ref: '../components/schemas/responses/CreateEventResponse.yaml'
     '400':
       description: Validation failed – request body is structurally invalid
     '401':
