@@ -4,7 +4,8 @@ get:
   summary: Retrieves all user groups of a specific user by their ID
   operationId: getUserGroupsByUserId
   parameters:
-    - $ref: '../components/parameters/user-id.yaml'
+    - $ref: '../components/parameters/path/user-id.yaml'
+    - $ref: '../components/parameters/query/user-group-id.yaml'
   responses:
     '200':
       description: A list of user groups that the user belongs to
