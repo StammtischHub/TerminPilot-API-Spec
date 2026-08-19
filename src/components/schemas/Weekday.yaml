@@ -1,0 +1,10 @@
+type: string
+description: The day of the week
+enum:
+  - MONDAY
+  - TUESDAY
+  - WEDNESDAY
+  - THURSDAY
+  - FRIDAY
+  - SATURDAY
+  - SUNDAY
