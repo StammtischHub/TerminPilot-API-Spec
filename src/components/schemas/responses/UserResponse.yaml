@@ -6,9 +6,7 @@ required:
   - roles
 properties:
   id:
-    type: integer
-    format: int64
-    description: The unique identifier of the logged in user
+    $ref: '../EntityId.yaml'
   username:
     type: string
     description: The username of the logged in user

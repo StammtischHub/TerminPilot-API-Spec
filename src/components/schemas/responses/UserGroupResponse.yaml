@@ -6,9 +6,7 @@ required:
   - members
 properties:
   id:
-    type: integer
-    format: int64
-    description: The unique identifier of the user group
+    $ref: '../EntityId.yaml'
   name:
     type: string
     description: The name of the group
