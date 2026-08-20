@@ -11,5 +11,4 @@ properties:
     type: array
     description: List of user IDs to be added to the group
     items:
-      type: integer
-      format: int64
+      $ref: '../EntityId.yaml'
