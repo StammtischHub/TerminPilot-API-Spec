@@ -3,5 +3,4 @@ in: path
 required: true
 description: The ID of the user group
 schema:
-  type: integer
-  format: int64
+  $ref: '../../schemas/EntityId.yaml'
