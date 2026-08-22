@@ -4,9 +4,6 @@ properties:
   name:
     type: string
     description: The new name of the user group (optional)
-  creatorId:
-    $ref: '../EntityId.yaml'
-    description: The ID of the user who created the group (optional)
   memberIds:
     type: array
     description: List of user IDs to be added or removed from the group (optional)
