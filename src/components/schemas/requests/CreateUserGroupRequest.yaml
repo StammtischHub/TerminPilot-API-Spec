@@ -2,6 +2,7 @@ description: Request schema for creating a user group
 type: object
 required:
   - name
+  - creatorId
   - memberIds
 properties:
   name:
