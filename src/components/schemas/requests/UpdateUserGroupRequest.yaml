@@ -1,7 +1,5 @@
 description: Request schema for updating a user group
 type: object
-required:
-  - id
 properties:
   name:
     type: string

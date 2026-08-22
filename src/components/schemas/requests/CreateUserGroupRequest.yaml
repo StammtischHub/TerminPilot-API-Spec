@@ -2,13 +2,17 @@ description: Request schema for creating a user group
 type: object
 required:
   - name
+  - creatorId
   - memberIds
 properties:
   name:
     type: string
     description: The name of the user group
+  creatorId:
+    description: The ID of the user who created the group
+    $ref: '../EntityId.yaml'
   memberIds:
     type: array
-    description: List of user IDs to be added to the group
+    description: List of user IDs to be added to the group as members
     items:
       $ref: '../EntityId.yaml'
