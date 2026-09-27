@@ -1,0 +1,9 @@
+description: Update User Request
+type: object
+required:
+  - username
+properties:
+  username:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]+$'
+    description: The new username

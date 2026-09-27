@@ -21,3 +21,5 @@ post:
             $ref: '../components/schemas/responses/UserGroupResponse.yaml'
     '400':
       description: Invalid user group data provided
+    '409':
+      description: User group name is already in use by the creator
