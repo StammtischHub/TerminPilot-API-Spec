@@ -6,6 +6,7 @@ patch:
   parameters:
     - $ref: '../components/parameters/path/user-id.yaml'
   requestBody:
+    required: true
     content:
       application/json:
         schema:
