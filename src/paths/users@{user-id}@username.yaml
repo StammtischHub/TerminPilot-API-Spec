@@ -2,7 +2,9 @@ patch:
   tags:
     - Users
   summary: Update a user
-  operationId: updateUser
+  operationId: updateUsername
+  parameters:
+    - $ref: '../components/parameters/path/user-id.yaml'
   requestBody:
     content:
       application/json:
