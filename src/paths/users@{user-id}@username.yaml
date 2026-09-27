@@ -1,0 +1,23 @@
+patch:
+  tags:
+    - Users
+  summary: Update a user
+  operationId: updateUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/requests/UpdateUsernameRequest.yaml'
+  responses:
+    '200':
+      description: User updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/responses/UserResponse.yaml'
+    '400':
+      description: Invalid request
+    '404':
+      description: User not found
+    '409':
+      description: Username already exists

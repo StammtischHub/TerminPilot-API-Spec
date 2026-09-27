@@ -56,6 +56,12 @@ paths:
   /api/users:
     $ref: './paths/users.yaml'
 
+  /api/users/{user-id}/username:
+    $ref: './paths/users@{user-id}@username.yaml'
+
+  /api/users/{user-id}/password:
+    $ref: './paths/users@{user-id}@password.yaml'
+
   /api/users/{user-id}/user-groups:
     $ref: './paths/users@{user-id}@user-groups.yaml'
 
