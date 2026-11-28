@@ -9,16 +9,16 @@ importers:
   .:
     devDependencies:
       '@redocly/cli':
-        specifier: 2.82.0
-        version: 2.82.0
+        specifier: 2.83.0
+        version: 2.83.0
       js-yaml:
         specifier: ^5.0.0
         version: 5.5.0
 
 packages:
 
-  '@redocly/cli@2.82.0':
-    resolution: {integrity: sha512-yyd53xbJgLRa1qyFhaxf9PxOnccjfWJmVRC7uqY7lRUhSq7Zo0id8lHLblpJKMjj4fE2t5zKDF3xml3hnBscJw==}
+  '@redocly/cli@2.83.0':
+    resolution: {integrity: sha512-wH4JzRiNm38NDScf2B7oT7QmE2Wpa7q+Wnzt0L02rKxdgldAA8QLD6F1IDs+izSeJzLW2sGeygwO71Wn074oqQ==}
     engines: {node: '>=22.12.0 || >=20.19.0 <21.0.0', npm: '>=10'}
     hasBin: true
 
@@ -31,7 +31,7 @@ packages:
 
 snapshots:
 
-  '@redocly/cli@2.82.0': {}
+  '@redocly/cli@2.83.0': {}
 
   argparse@3.0.4: {}
 
